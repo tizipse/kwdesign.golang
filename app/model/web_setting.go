@@ -18,3 +18,14 @@ type WebSetting struct {
 	UpdatedAt carbon.DateTime `gorm:"column:updated_at"`
 	DeletedAt gorm.DeletedAt  `gorm:"column:deleted_at"`
 }
+
+const (
+	WebSettingTypeOfInput    = "input"
+	WebSettingTypeOfTextarea = "textarea"
+	WebSettingTypeOfEnable   = "enable"
+	WebSettingTypeOfUrl      = "url"
+	WebSettingTypeOfEmail    = "email"
+
+	WebSettingRequiredOfYes = 1
+	WebSettingRequiredOfNo  = 2
+)

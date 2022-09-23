@@ -10,7 +10,7 @@ create table web_banner
     `target`     varchar(5)       not null default '' comment '链接打开方式：blank=新窗口；self=本窗口',
     `url`        varchar(255)     not null default '' comment '链接',
     `is_enable`  tinyint unsigned not null default 0 comment '是否启用：1=是；2=否；',
-    `order`      int unsigned     not null default 0 comment '序号',
+    `order`      tinyint unsigned not null default 0 comment '序号',
     `created_at` timestamp        not null default CURRENT_TIMESTAMP,
     `updated_at` timestamp        not null default CURRENT_TIMESTAMP,
     `deleted_at` timestamp                 default null,

@@ -30,7 +30,7 @@ require (
 	gorm.io/driver/mysql v1.3.6
 	gorm.io/driver/postgres v1.3.10
 	gorm.io/driver/sqlserver v1.3.2
-	gorm.io/gorm v1.23.9
+	gorm.io/gorm v1.23.10
 )
 
 require (
@@ -87,7 +87,7 @@ require (
 	go.opentelemetry.io/otel v1.10.0 // indirect
 	go.opentelemetry.io/otel/trace v1.10.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	golang.org/x/net v0.0.0-20220920203100-d0c6ba3f52d9 // indirect
+	golang.org/x/net v0.0.0-20220921203646-d300de134e69 // indirect
 	golang.org/x/sync v0.0.0-20220907140024-f12130a52804 // indirect
 	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8 // indirect
 	golang.org/x/text v0.3.7 // indirect

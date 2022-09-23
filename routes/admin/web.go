@@ -22,13 +22,36 @@ func RouteWeb(route *gin.RouterGroup) {
 			banner.PUT("enable", web.DoBannerByEnable)
 		}
 
-		settings := wb.Group("settings")
+		categories := wb.Group("categories")
 		{
-			settings.GET("", web.ToSettingByInformation)
+			categories.GET("", web.ToCategories)
+			categories.GET(":id", web.ToCategoryByInformation)
+			categories.PUT(":id", web.DoCategoryByUpdate)
+			categories.DELETE(":id", web.DoCategoryByDelete)
+		}
+
+		category := wb.Group("category")
+		{
+			category.POST("", web.DoCategoryByCreate)
+			category.PUT("enable", web.DoCategoryByEnable)
+		}
+
+		contacts := wb.Group("contacts")
+		{
+			contacts.GET("", web.ToContactByPaginate)
+			contacts.PUT(":id", web.DoContactByUpdate)
+			contacts.DELETE(":id", web.DoContactByDelete)
+		}
+
+		contact := wb.Group("contact")
+		{
+			contact.POST("", web.DoContactByCreate)
+			contact.PUT("enable", web.DoContactByEnable)
 		}
 
 		setting := wb.Group("setting")
 		{
+			setting.GET("", web.ToSettingByInformation)
 			setting.PUT("", web.DoSettingBySave)
 		}
 	}

@@ -12,7 +12,7 @@ import (
 
 var (
 	uni   *ut.UniversalTranslator
-	valid *validator.Validate
+	Valid *validator.Validate
 	trans ut.Translator
 )
 
@@ -25,47 +25,47 @@ func Init() {
 	trans, _ = uni.GetTranslator("zh")
 
 	//获取gin的校验器
-	valid = binding.Validator.Engine().(*validator.Validate)
+	Valid = binding.Validator.Engine().(*validator.Validate)
 
-	valid.RegisterTagNameFunc(func(field reflect.StructField) string {
+	Valid.RegisterTagNameFunc(func(field reflect.StructField) string {
 		return field.Tag.Get("label")
 	})
 
-	_ = valid.RegisterValidation("mobile", mobile)
-	_ = valid.RegisterValidation("dir", dir)
-	_ = valid.RegisterValidation("username", username)
-	_ = valid.RegisterValidation("password", password)
-	_ = valid.RegisterValidation("snowflake", snowflake)
+	_ = Valid.RegisterValidation("mobile", mobile)
+	_ = Valid.RegisterValidation("dir", dir)
+	_ = Valid.RegisterValidation("username", username)
+	_ = Valid.RegisterValidation("password", password)
+	_ = Valid.RegisterValidation("snowflake", snowflake)
 
-	_ = valid.RegisterTranslation("mobile", trans, func(ut ut.Translator) error {
+	_ = Valid.RegisterTranslation("mobile", trans, func(ut ut.Translator) error {
 		return ut.Add("mobile", "手机号格式错误", true)
 	}, func(ut ut.Translator, fe validator.FieldError) string {
 		t, _ := ut.T("mobile")
 		return t
 	})
 
-	_ = valid.RegisterTranslation("dir", trans, func(ut ut.Translator) error {
+	_ = Valid.RegisterTranslation("dir", trans, func(ut ut.Translator) error {
 		return ut.Add("dir", "文件夹格式错误", true)
 	}, func(ut ut.Translator, fe validator.FieldError) string {
 		t, _ := ut.T("dir")
 		return t
 	})
 
-	_ = valid.RegisterTranslation("username", trans, func(ut ut.Translator) error {
+	_ = Valid.RegisterTranslation("username", trans, func(ut ut.Translator) error {
 		return ut.Add("username", "请输入 4-20 位的英文字母数字以及 -_ 等字符", true)
 	}, func(ut ut.Translator, fe validator.FieldError) string {
 		t, _ := ut.T("username")
 		return t
 	})
 
-	_ = valid.RegisterTranslation("password", trans, func(ut ut.Translator) error {
+	_ = Valid.RegisterTranslation("password", trans, func(ut ut.Translator) error {
 		return ut.Add("password", "请输入 6-32 位的英文字母数字以及 -_@$&%! 等特殊字符", true)
 	}, func(ut ut.Translator, fe validator.FieldError) string {
 		t, _ := ut.T("password")
 		return t
 	})
 
-	_ = valid.RegisterTranslation("snowflake", trans, func(ut ut.Translator) error {
+	_ = Valid.RegisterTranslation("snowflake", trans, func(ut ut.Translator) error {
 		return ut.Add("snowflake", "雪花 ID 格式错误", true)
 	}, func(ut ut.Translator, fe validator.FieldError) string {
 		t, _ := ut.T("snowflake")
@@ -73,7 +73,7 @@ func Init() {
 	})
 
 	//注册翻译器
-	_ = zhTranslation.RegisterDefaultTranslations(valid, trans)
+	_ = zhTranslation.RegisterDefaultTranslations(Valid, trans)
 }
 
 // Translate 翻译错误信息
