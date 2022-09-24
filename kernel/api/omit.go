@@ -40,7 +40,9 @@ func Omits() []Api {
 		{Method: http.MethodGet, Path: "/admin/site/role/enable"},
 		{Method: http.MethodGet, Path: "/admin/site/module/enable"},
 
-		{Method: http.MethodGet, Path: "/admin/kwd/category/parents"},
-		{Method: http.MethodGet, Path: "/admin/kwd/categories/:id"},
+		{Method: http.MethodGet, Path: "/admin/web/categories/:id"},
+		{Method: http.MethodGet, Path: "/admin/web/classifications/:id"},
+		{Method: http.MethodGet, Path: "/admin/web/classification/enable"},
+		{Method: http.MethodGet, Path: "/admin/web/projects/:id"},
 	}
 }

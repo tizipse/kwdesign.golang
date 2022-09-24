@@ -61,23 +61,30 @@ func DoRoleByCreate(ctx *gin.Context) {
 		}
 	}
 	if len(children2) > 0 {
-
 		var permissions []model.SysPermission
 
-		app.Database.Find(&permissions, "`parent_i2` in (?) and `method`<>? and `path`<>?", children2, "", "")
-
-		for _, item := range permissions {
-			permissionsIds = append(permissionsIds, item.Id)
+		if app.Database.Find(&permissions, "`parent_i2` in (?) and `method`<>? and `path`<>?", children2, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
+		} else if app.Database.Find(&permissions, "`id` in (?) and `method`<>? and `path`<>?", children2, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
 		}
 	}
 	if len(children1) > 0 {
 
 		var permissions []model.SysPermission
 
-		app.Database.Find(&permissions, "`parent_i1` in (?) and `method`<>? and `path`<>?", children1, "", "")
-
-		for _, item := range permissions {
-			permissionsIds = append(permissionsIds, item.Id)
+		if app.Database.Find(&permissions, "`parent_i1` in (?) and `method`<>? and `path`<>?", children1, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
+		} else if app.Database.Find(&permissions, "`id` in (?) and `method`<>? and `path`<>?", children1, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
 		}
 	}
 
@@ -223,23 +230,30 @@ func DoRoleByUpdate(ctx *gin.Context) {
 		}
 	}
 	if len(children2) > 0 {
-
 		var permissions []model.SysPermission
 
-		app.Database.Find(&permissions, "`parent_i2` in (?) and `method`<>? and `path`<>?", children2, "", "")
-
-		for _, item := range permissions {
-			permissionsIds = append(permissionsIds, item.Id)
+		if app.Database.Find(&permissions, "`parent_i2` in (?) and `method`<>? and `path`<>?", children2, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
+		} else if app.Database.Find(&permissions, "`id` in (?) and `method`<>? and `path`<>?", children2, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
 		}
 	}
 	if len(children1) > 0 {
 
 		var permissions []model.SysPermission
 
-		app.Database.Find(&permissions, "`parent_i1` in (?) and `method`<>? and `path`<>?", children1, "", "")
-
-		for _, item := range permissions {
-			permissionsIds = append(permissionsIds, item.Id)
+		if app.Database.Find(&permissions, "`parent_i1` in (?) and `method`<>? and `path`<>?", children1, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
+		} else if app.Database.Find(&permissions, "`id` in (?) and `method`<>? and `path`<>?", children1, "", ""); len(permissions) > 0 {
+			for _, item := range permissions {
+				permissionsIds = append(permissionsIds, item.Id)
+			}
 		}
 	}
 
@@ -460,13 +474,9 @@ func ToRoleByPaginate(ctx *gin.Context) {
 		Size: request.GetSize(),
 	}
 
-	tc := tx
-
-	tc.Model(model.SysRole{}).Count(&responses.Total)
+	tx.Model(model.SysRole{}).Count(&responses.Total)
 
 	if responses.Total > 0 {
-
-		tx = tx.Order("`id` desc")
 
 		var roles []model.SysRole
 
@@ -474,6 +484,7 @@ func ToRoleByPaginate(ctx *gin.Context) {
 			Preload("BindPermissions.Permission").
 			Offset(request.GetOffset()).
 			Limit(request.GetLimit()).
+			Order("`id` desc").
 			Find(&roles)
 
 		responses.Data = make([]res.ToRoleByPaginate, len(roles))
@@ -488,8 +499,20 @@ func ToRoleByPaginate(ctx *gin.Context) {
 			}
 
 			for _, value := range item.BindPermissions {
-
-				responses.Data[index].Permissions = append(responses.Data[index].Permissions, []int{value.Permission.ModuleId, value.Permission.ParentI1, value.Permission.ParentI2, value.PermissionId})
+				var permissions []int
+				if value.Permission.ModuleId > 0 {
+					permissions = append(permissions, value.Permission.ModuleId)
+				}
+				if value.Permission.ParentI1 > 0 {
+					permissions = append(permissions, value.Permission.ParentI1)
+				}
+				if value.Permission.ParentI2 > 0 {
+					permissions = append(permissions, value.Permission.ParentI2)
+				}
+				if value.PermissionId > 0 {
+					permissions = append(permissions, value.PermissionId)
+				}
+				responses.Data[index].Permissions = append(responses.Data[index].Permissions, permissions)
 			}
 		}
 	}
