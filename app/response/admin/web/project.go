@@ -7,6 +7,7 @@ type ToProjectByPaginate struct {
 	Name           string `json:"name"`
 	Address        string `json:"address"`
 	Picture        string `json:"picture"`
+	DatedAt        string `json:"dated_at,omitempty"`
 	IsEnable       int8   `json:"is_enable"`
 	CreatedAt      string `json:"created_at"`
 }

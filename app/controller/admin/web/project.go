@@ -323,6 +323,7 @@ func ToProjectByPaginate(ctx *gin.Context) {
 				Name:      item.Name,
 				Address:   item.Address,
 				Picture:   item.Picture,
+				DatedAt:   item.DatedAt.ToDateString(),
 				IsEnable:  item.IsEnable,
 				CreatedAt: item.CreatedAt.ToDateTimeString(),
 			}

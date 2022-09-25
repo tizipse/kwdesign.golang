@@ -78,6 +78,18 @@ func RouteWeb(route *gin.RouterGroup) {
 			contact.PUT("enable", web.DoContactByEnable)
 		}
 
+		pictures := wb.Group("pictures")
+		{
+			pictures.GET("", web.ToPictures)
+			pictures.PUT(":id", web.DoPictureByUpdate)
+			pictures.DELETE(":id", web.DoPictureByDelete)
+		}
+
+		picture := wb.Group("picture")
+		{
+			picture.POST("", web.DoPictureByCreate)
+		}
+
 		setting := wb.Group("setting")
 		{
 			setting.GET("", web.ToSettingByInformation)
