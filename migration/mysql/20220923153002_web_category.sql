@@ -4,7 +4,7 @@
 CREATE TABLE `web_category`
 (
     `id`          int unsigned     NOT NULL AUTO_INCREMENT,
-    `theme`       varchar(5)       NOT NULL DEFAULT '' COMMENT '导航栏：light=明亮；dark=黑暗',
+    `theme`       varchar(5)       NOT NULL DEFAULT '' COMMENT '主题：light=明亮；dark=黑暗',
     `uri`         varchar(32)      NOT NULL DEFAULT '' COMMENT 'URI',
     `name`        varchar(32)      NOT NULL DEFAULT '' COMMENT '名称',
     `picture`     varchar(255)     NOT NULL DEFAULT '' COMMENT '图片',

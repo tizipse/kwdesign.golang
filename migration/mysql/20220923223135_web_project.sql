@@ -5,7 +5,7 @@ CREATE TABLE `web_project`
 (
     `id`                varchar(64)      NOT NULL,
     `classification_id` varchar(64)      not null comment '分类ID',
-    `theme`             varchar(5)       NOT NULL DEFAULT '' COMMENT '导航栏：light=明亮；dark=黑暗',
+    `theme`             varchar(5)       NOT NULL DEFAULT '' COMMENT '主题：light=明亮；dark=黑暗',
     `name`              varchar(32)      NOT NULL DEFAULT '' COMMENT '名称',
     `address`           varchar(64)      NOT NULL DEFAULT '' COMMENT '地点',
     `picture`           varchar(255)     NOT NULL DEFAULT '' COMMENT '图片',

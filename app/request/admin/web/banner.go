@@ -3,7 +3,7 @@ package web
 import "kwd/app/request/basic"
 
 type DoBannerByCreate struct {
-	Layout  string `json:"layout" form:"layout" binding:"required,oneof=mobile ipad pc" label:"布局"`
+	Theme   string `json:"theme" form:"theme" binding:"required,oneof=light dark" label:"主题"`
 	Picture string `json:"picture" form:"picture" binding:"required,url,max=255" label:"图片"`
 	Name    string `form:"name" json:"name" binding:"required,max=32" label:"名称"`
 	Target  string `json:"target" form:"target" binding:"required,oneof=blank self" label:"打开"`
@@ -13,7 +13,7 @@ type DoBannerByCreate struct {
 }
 
 type DoBannerByUpdate struct {
-	Layout  string `json:"layout" form:"layout" binding:"required,oneof=mobile ipad pc" label:"布局"`
+	Theme   string `json:"theme" form:"theme" binding:"required,oneof=light dark" label:"主题"`
 	Picture string `json:"picture" form:"picture" binding:"required,url,max=255" label:"图片"`
 	Name    string `form:"name" json:"name" binding:"required,min=2,max=20" label:"名称"`
 	Target  string `json:"target" form:"target" binding:"required,oneof=blank self" label:"打开"`

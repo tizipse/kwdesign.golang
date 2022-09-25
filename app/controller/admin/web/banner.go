@@ -23,7 +23,7 @@ func DoBannerByCreate(ctx *gin.Context) {
 	}
 
 	banner := model.WebBanner{
-		Layout:   request.Layout,
+		Theme:    request.Theme,
 		Picture:  request.Picture,
 		Name:     request.Name,
 		Target:   request.Target,
@@ -68,7 +68,7 @@ func DoBannerByUpdate(ctx *gin.Context) {
 		return
 	}
 
-	banner.Layout = request.Layout
+	banner.Theme = request.Theme
 	banner.Picture = request.Picture
 	banner.Name = request.Name
 	banner.Target = request.Target
@@ -178,7 +178,7 @@ func ToBannerByPaginate(ctx *gin.Context) {
 		for index, item := range banners {
 			responses.Data[index] = wr.ToBannerByPaginate{
 				Id:        item.Id,
-				Layout:    item.Layout,
+				Theme:     item.Theme,
 				Picture:   item.Picture,
 				Name:      item.Name,
 				Target:    item.Target,

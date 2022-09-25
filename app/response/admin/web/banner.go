@@ -2,7 +2,7 @@ package web
 
 type ToBannerByPaginate struct {
 	Id        int    `json:"id"`
-	Layout    string `json:"layout"`
+	Theme     string `json:"theme"`
 	Picture   string `json:"picture"`
 	Name      string `json:"name"`
 	Target    string `json:"target"`
