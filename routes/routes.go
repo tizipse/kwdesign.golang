@@ -5,6 +5,7 @@ import (
 	"kwd/app/middleware/basic"
 	"kwd/kernel/app"
 	"kwd/routes/admin"
+	"kwd/routes/client"
 )
 
 func Routes(route *gin.Engine) {
@@ -14,4 +15,5 @@ func Routes(route *gin.Engine) {
 	route.Static("/upload", app.Dir.Runtime+"/upload")
 
 	admin.Admins(route)
+	client.Clients(route)
 }

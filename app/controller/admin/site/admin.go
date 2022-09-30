@@ -60,11 +60,17 @@ func DoAdminByCreate(ctx *gin.Context) {
 	tx := app.Database.Begin()
 
 	admin := model.SysAdmin{
-		Username: request.Username,
 		Nickname: request.Nickname,
-		Mobile:   request.Mobile,
 		Password: string(password),
 		IsEnable: request.IsEnable,
+	}
+
+	if !strutil.IsEmpty(request.Username) {
+		admin.Username = &request.Username
+	}
+
+	if !strutil.IsEmpty(request.Mobile) {
+		admin.Mobile = &request.Mobile
 	}
 
 	if ca := tx.Create(&admin); ca.Error != nil {
@@ -164,8 +170,12 @@ func DoAdminByUpdate(ctx *gin.Context) {
 	}
 
 	admin.Nickname = request.Nickname
-	admin.Mobile = request.Mobile
+	admin.Mobile = nil
 	admin.IsEnable = request.IsEnable
+
+	if !strutil.IsEmpty(request.Mobile) {
+		admin.Mobile = &request.Mobile
+	}
 
 	if request.Password != "" {
 
@@ -337,11 +347,17 @@ func ToAdminByPaginate(ctx *gin.Context) {
 
 			responses.Data[index] = res.ToAdminByPaginate{
 				Id:        item.Id,
-				Username:  item.Username,
 				Nickname:  item.Nickname,
-				Mobile:    item.Mobile,
 				IsEnable:  item.IsEnable,
 				CreatedAt: item.CreatedAt.ToDateTimeString(),
+			}
+
+			if item.Username != nil {
+				responses.Data[index].Username = *item.Username
+			}
+
+			if item.Mobile != nil {
+				responses.Data[index].Mobile = *item.Mobile
 			}
 
 			for _, value := range item.BindRoles {

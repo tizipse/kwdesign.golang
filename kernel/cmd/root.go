@@ -103,8 +103,8 @@ func root(cmd *cobra.Command, args []string) {
 		hash, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 		admin = model.SysAdmin{
-			Username: username,
-			Mobile:   mobile,
+			Username: &username,
+			Mobile:   &mobile,
 			Nickname: nickname,
 			Password: string(hash),
 			IsEnable: constant.IsEnableYes,

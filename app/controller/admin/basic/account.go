@@ -23,10 +23,16 @@ func ToAccountByInformation(ctx *gin.Context) {
 	}
 
 	responses := res.ToAccountByInformation{
-		Username: admin.Username,
 		Nickname: admin.Nickname,
 		Avatar:   admin.Avatar,
-		Mobile:   admin.Mobile,
+	}
+
+	if admin.Username != nil {
+		responses.Username = *admin.Username
+	}
+
+	if admin.Mobile != nil {
+		responses.Mobile = *admin.Mobile
 	}
 
 	response.Success(ctx, responses)
