@@ -48,6 +48,8 @@ func RouteWeb(route *gin.RouterGroup) {
 		{
 			category.POST("", web.DoCategoryByCreate)
 			category.PUT("enable", web.DoCategoryByEnable)
+			category.PUT("is_required_picture", web.DoCategoryByIsRequiredPicture)
+			category.PUT("is_required_html", web.DoCategoryByIsRequiredHtml)
 		}
 
 		classifications := wb.Group("classifications")
