@@ -21,5 +21,7 @@ type SysPermission struct {
 	DeletedAt gorm.DeletedAt
 
 	Module      SysModule       `gorm:"foreignKey:ModuleId"`
+	Parent1     *SysPermission  `gorm:"foreignKey:ParentI1;references:Id"`
+	Parent2     *SysPermission  `gorm:"foreignKey:ParentI2;references:Id"`
 	Permissions []SysPermission `gorm:"many2many:sys_role_bind_permission;foreignKey:Id;joinForeignKey:RoleId;References:Id;joinReferences:PermissionId"`
 }

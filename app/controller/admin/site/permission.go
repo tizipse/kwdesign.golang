@@ -343,22 +343,38 @@ func ToPermissionBySelf(ctx *gin.Context) {
 
 	var children, children1, children2 []model.SysPermission
 
-	if authorize.Root(authorize.Id(ctx)) {
+	var permissions []model.SysPermission
 
-		var permissions []model.SysPermission
+	tx := app.Database.
+		Preload("Module").
+		Preload("Parent1").
+		Preload("Parent2").
+		Where("method<>? and path<>?", "", "")
 
-		app.Database.Preload("Module").Find(&permissions)
+	if !authorize.Root(authorize.Id(ctx)) {
+		tx = tx.
+			Where("exists (?)", app.Database.
+				Select("1").
+				Model(model.SysRoleBindPermission{}).
+				Where(fmt.Sprintf("`%s`.`id`=`%s`.`permission_id`", model.TableSysPermission, model.TableSysRoleBindPermission)).
+				Where("exists (?)", app.Database.
+					Select("1").
+					Model(model.SysAdminBindRole{}).
+					Where(fmt.Sprintf("`%s`.`role_id`=`%s`.`role_id` and `%s`.`admin_id`=?", model.TableSysRoleBindPermission, model.TableSysAdminBindRole, model.TableSysAdminBindRole), authorize.Id(ctx)),
+				),
+			)
+	}
 
+	tx.Find(&permissions)
+
+	if len(permissions) > 0 {
 		for _, item := range permissions {
-
 			mark := true
-
 			for _, value := range modules {
 				if item.Module.Id == value.Id {
 					mark = false
 				}
 			}
-
 			if mark {
 				modules = append(modules, res.TreePermission{
 					Id:   item.Module.Id,
@@ -367,14 +383,40 @@ func ToPermissionBySelf(ctx *gin.Context) {
 			}
 		}
 
+		child := map[int]model.SysPermission{}
+		child1 := map[int]model.SysPermission{}
+		child2 := map[int]model.SysPermission{}
+
 		for _, item := range permissions {
 			if item.ParentI2 > 0 {
-				children2 = append(children2, item)
+				if item.Parent1 != nil {
+					item.Parent1.Module = item.Module
+					child[item.ParentI1] = *item.Parent1
+				}
+				if item.Parent2 != nil {
+					item.Parent2.Module = item.Module
+					child1[item.ParentI2] = *item.Parent2
+				}
+				child2[item.Id] = item
 			} else if item.ParentI1 > 0 {
-				children1 = append(children1, item)
+				if item.Parent1 != nil {
+					item.Parent1.Module = item.Module
+					child[item.ParentI1] = *item.Parent1
+				}
+				child1[item.Id] = item
 			} else {
-				children = append(children, item)
+				child[item.Id] = item
 			}
+		}
+
+		for _, item := range child {
+			children = append(children, item)
+		}
+		for _, item := range child1 {
+			children1 = append(children1, item)
+		}
+		for _, item := range child2 {
+			children2 = append(children2, item)
 		}
 	}
 
