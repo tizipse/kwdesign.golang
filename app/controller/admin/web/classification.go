@@ -26,6 +26,7 @@ func DoClassificationByCreate(ctx *gin.Context) {
 	classification := model.WebClassification{
 		Id:          app.Snowflake.Generate().String(),
 		Name:        request.Name,
+		Alias:       request.Alias,
 		Title:       request.Title,
 		Keyword:     request.Keyword,
 		Description: request.Description,
@@ -70,6 +71,7 @@ func DoClassificationByUpdate(ctx *gin.Context) {
 	}
 
 	classification.Name = request.Name
+	classification.Alias = request.Alias
 	classification.Title = request.Title
 	classification.Keyword = request.Keyword
 	classification.Description = request.Description
@@ -158,6 +160,7 @@ func ToClassifications(ctx *gin.Context) {
 		responses[index] = wr.ToClassifications{
 			Id:        item.Id,
 			Name:      item.Name,
+			Alias:     item.Alias,
 			Order:     item.Order,
 			IsEnable:  item.IsEnable,
 			CreatedAt: item.CreatedAt.ToDateTimeString(),
@@ -209,6 +212,7 @@ func ToClassificationByInformation(ctx *gin.Context) {
 	responses := wr.ToClassificationByInformation{
 		Id:          classification.Id,
 		Name:        classification.Name,
+		Alias:       classification.Alias,
 		Title:       classification.Title,
 		Keyword:     classification.Keyword,
 		Description: classification.Description,

@@ -86,6 +86,7 @@ func ToProjectByInformation(ctx *gin.Context) {
 		Classification: project.ClassificationId,
 		Name:           project.Name,
 		Address:        project.Address,
+		Height:         project.Height,
 		Picture:        project.Picture,
 		Title:          project.Title,
 		Keyword:        project.Keyword,

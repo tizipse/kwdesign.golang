@@ -14,6 +14,7 @@ type ToProjectByInformation struct {
 	Classification string   `json:"classification"`
 	Name           string   `json:"name"`
 	Address        string   `json:"address"`
+	Height         int8     `json:"height"`
 	Picture        string   `json:"picture"`
 	Title          string   `json:"title"`
 	Keyword        string   `json:"keyword"`

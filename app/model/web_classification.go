@@ -10,6 +10,7 @@ const TableWebClassification = "web_classification"
 type WebClassification struct {
 	Id          string          `gorm:"column:id;primary_key"`
 	Name        string          `gorm:"column:name"`
+	Alias       string          `gorm:"column:alias"`
 	Title       string          `gorm:"column:title"`
 	Keyword     string          `gorm:"column:keyword"`
 	Description string          `gorm:"column:description"`

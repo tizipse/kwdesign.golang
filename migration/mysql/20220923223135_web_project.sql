@@ -8,6 +8,7 @@ CREATE TABLE `web_project`
     `theme`             varchar(5)       NOT NULL DEFAULT '' COMMENT '主题：light=明亮；dark=黑暗',
     `name`              varchar(32)      NOT NULL DEFAULT '' COMMENT '名称',
     `address`           varchar(64)      NOT NULL DEFAULT '' COMMENT '地点',
+    `height`            tinyint unsigned NOT NULL DEFAULT 0 COMMENT '高度（%）',
     `picture`           varchar(255)     NOT NULL DEFAULT '' COMMENT '图片',
     `title`             varchar(255)     NOT NULL DEFAULT '' COMMENT 'SEO 标题',
     `keyword`           varchar(255)     NOT NULL DEFAULT '' COMMENT 'SEO 关键词',

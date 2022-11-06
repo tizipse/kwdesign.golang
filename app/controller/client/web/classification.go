@@ -21,6 +21,7 @@ func ToClassifications(ctx *gin.Context) {
 		responses[index] = web.ToClassifications{
 			Id:          item.Id,
 			Name:        item.Name,
+			Alias:       item.Alias,
 			Title:       item.Title,
 			Keyword:     item.Keyword,
 			Description: item.Description,

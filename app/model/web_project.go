@@ -11,6 +11,7 @@ type WebProject struct {
 	Theme            string          `gorm:"column:theme"`
 	Name             string          `gorm:"column:name"`
 	Address          string          `gorm:"column:address"`
+	Height           int8            `gorm:"column:height"`
 	Picture          string          `gorm:"column:picture"`
 	Title            string          `gorm:"column:title"`
 	Keyword          string          `gorm:"column:keyword"`

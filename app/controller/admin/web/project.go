@@ -43,6 +43,7 @@ func DoProjectByCreate(ctx *gin.Context) {
 		Theme:            request.Theme,
 		Name:             request.Name,
 		Address:          request.Address,
+		Height:           request.Height,
 		Picture:          request.Picture,
 		Title:            request.Title,
 		Keyword:          request.Keyword,
@@ -177,6 +178,7 @@ func DoProjectByUpdate(ctx *gin.Context) {
 	project.Theme = request.Theme
 	project.Name = request.Name
 	project.Address = request.Address
+	project.Height = request.Height
 	project.Picture = request.Picture
 	project.Title = request.Title
 	project.Keyword = request.Keyword
@@ -365,6 +367,7 @@ func ToProjectByInformation(ctx *gin.Context) {
 		Theme:          project.Theme,
 		Name:           project.Name,
 		Address:        project.Address,
+		Height:         project.Height,
 		Picture:        project.Picture,
 		Title:          project.Title,
 		Keyword:        project.Keyword,

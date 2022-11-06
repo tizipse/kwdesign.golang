@@ -4,6 +4,7 @@ import "kwd/app/request/basic"
 
 type DoClassificationByCreate struct {
 	Name        string `json:"name" form:"name" binding:"required,max=32" label:"名称"`
+	Alias       string `json:"alias" form:"alias" binding:"required,max=32" label:"别名"`
 	Title       string `json:"title" form:"title" binding:"omitempty,max=255" label:"SEO 标题"`
 	Keyword     string `json:"keyword" form:"keyword" binding:"omitempty,max=255" label:"SEO 关键词"`
 	Description string `json:"description" form:"description" binding:"omitempty,max=255" label:"SEO 描述"`
@@ -13,6 +14,7 @@ type DoClassificationByCreate struct {
 
 type DoClassificationByUpdate struct {
 	Name        string `json:"name" form:"name" binding:"required,max=32" label:"名称"`
+	Alias       string `json:"alias" form:"alias" binding:"required,max=32" label:"别名"`
 	Title       string `json:"title" form:"title" binding:"omitempty,max=255" label:"SEO 标题"`
 	Keyword     string `json:"keyword" form:"keyword" binding:"omitempty,max=255" label:"SEO 关键词"`
 	Description string `json:"description" form:"description" binding:"omitempty,max=255" label:"SEO 描述"`
