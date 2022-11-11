@@ -49,6 +49,7 @@ func RouteWeb(route *gin.RouterGroup) {
 		project := wg.Group("project")
 		{
 			project.GET("related", web.ToProjectByRelated)
+			project.GET("recommend", web.ToProjectByRecommend)
 		}
 	}
 }

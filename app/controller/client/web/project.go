@@ -122,10 +122,48 @@ func ToProjectByRelated(ctx *gin.Context) {
 
 	tx.Order("rand()").Limit(8).Find(&projects)
 
-	responses := make([]wr.ToProjectByPaginate, len(projects))
+	responses := make([]wr.ToProjectByRelated, len(projects))
 
 	for index, item := range projects {
-		responses[index] = wr.ToProjectByPaginate{
+		responses[index] = wr.ToProjectByRelated{
+			Id:      item.Id,
+			Name:    item.Name,
+			Picture: item.Picture,
+			Address: item.Address,
+			DatedAt: item.DatedAt.ToDateString(),
+		}
+	}
+
+	response.Success(ctx, responses)
+}
+
+func ToProjectByRecommend(ctx *gin.Context) {
+
+	var request web.ToProjectByRecommend
+
+	if err := ctx.ShouldBind(&request); err != nil {
+		response.FailByRequest(ctx, err)
+		return
+	}
+
+	tx := app.Database.Where("`is_enable`=?", constant.IsEnableYes)
+
+	if !strutil.IsEmpty(request.Classification) {
+		tx = tx.Where("`classification_id`=?", request.Classification)
+	}
+
+	if len(request.Excludes) > 0 {
+		tx = tx.Where("`id` not in (?)", request.Excludes)
+	}
+
+	var projects []model.WebProject
+
+	tx.Order("rand()").Limit(int(request.Number)).Find(&projects)
+
+	responses := make([]wr.ToProjectByRecommend, len(projects))
+
+	for index, item := range projects {
+		responses[index] = wr.ToProjectByRecommend{
 			Id:      item.Id,
 			Name:    item.Name,
 			Picture: item.Picture,

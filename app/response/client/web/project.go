@@ -31,3 +31,11 @@ type ToProjectByRelated struct {
 	Picture string `json:"picture"`
 	DatedAt string `json:"dated_at"`
 }
+
+type ToProjectByRecommend struct {
+	Id      string `json:"id"`
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	Picture string `json:"picture"`
+	DatedAt string `json:"dated_at"`
+}
