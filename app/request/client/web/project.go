@@ -16,5 +16,5 @@ type ToProjectByRelated struct {
 type ToProjectByRecommend struct {
 	Number         int8     `json:"number" form:"number" binding:"required,gte=1,lte=20" label:"数量"`
 	Classification string   `json:"classification" form:"classification" binding:"omitempty,snowflake" label:"分类"`
-	Excludes       []string `json:"excludes" form:"excludes" binding:"omitempty,max=10,dive,snowflake" label:"排除"`
+	Excludes       []string `json:"excludes[]" form:"excludes[]" binding:"omitempty,max=10,dive,snowflake" label:"排除"`
 }
