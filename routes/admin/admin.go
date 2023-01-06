@@ -7,34 +7,35 @@ import (
 	basicMiddleware "kwd/app/middleware/basic"
 )
 
-func Admins(route *gin.Engine) {
-	admin := route.Group("/admin")
-	admin.Use(basicMiddleware.JwtParseMiddleware())
+func Admins(routes *gin.Engine) {
+
+	route := routes.Group("admin")
+	route.Use(basicMiddleware.JwtParseMiddleware())
 	{
-		login := admin.Group("/login")
+		login := route.Group("login")
 		{
-			login.POST("/account", basicMiddleware.LimitMiddleware(nil), basic.DoLoginByAccount)
-			login.POST("/qrcode", basicMiddleware.LimitMiddleware(nil), basic.DoLoginByQrcode)
+			login.POST("account", basicMiddleware.LimitMiddleware(nil), basic.DoLoginByAccount)
+			login.POST("qrcode", basicMiddleware.LimitMiddleware(nil), basic.DoLoginByQrcode)
 		}
 
-		auth := admin.Group("")
+		auth := route.Group("")
 		auth.Use(basicMiddleware.AuthMiddleware(), adminMiddleware.CasbinMiddleware())
 		{
-			ag := auth.Group("/account")
+			account := auth.Group("account")
 			{
-				ag.PUT("", basic.DoAccountByUpdate)
-				ag.GET("/information", basic.ToAccountByInformation)
-				ag.GET("/module", basic.ToAccountByModule)
-				ag.GET("/permission", basic.ToAccountByPermission)
-				ag.POST("/logout", basic.DoLogout)
+				account.PUT("", basic.DoAccountByUpdate)
+				account.GET("information", basic.ToAccountByInformation)
+				account.GET("module", basic.ToAccountByModule)
+				account.GET("permission", basic.ToAccountByPermission)
+				account.POST("logout", basic.DoLogout)
 			}
 
 			RouteSite(auth)
 			RouteWeb(auth)
 
-			ug := auth.Group("upload")
+			upload := auth.Group("upload")
 			{
-				ug.POST("", basic.DoUploadBySimple)
+				upload.POST("", basic.DoUploadBySimple)
 			}
 		}
 	}

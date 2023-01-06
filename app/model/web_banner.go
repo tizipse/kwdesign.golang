@@ -9,6 +9,7 @@ const TableWebBanner = "web_banner"
 
 type WebBanner struct {
 	Id        int             `gorm:"column:id;primary_key"`
+	Client    string          `gorm:"column:client"`
 	Theme     string          `gorm:"column:theme"`
 	Picture   string          `gorm:"column:picture"`
 	Name      string          `gorm:"column:name"`
@@ -22,6 +23,8 @@ type WebBanner struct {
 }
 
 const (
-	WebBannerTargetOfBlank = "blank"
-	WebBannerTargetOfSelf  = "self"
+	WebBannerClientOfPc     = "PC"
+	WebBannerClientOfMobile = "MOBILE"
+	WebBannerTargetOfBlank  = "blank"
+	WebBannerTargetOfSelf   = "self"
 )

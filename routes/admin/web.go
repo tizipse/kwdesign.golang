@@ -5,24 +5,24 @@ import (
 	"kwd/app/controller/admin/web"
 )
 
-func RouteWeb(route *gin.RouterGroup) {
+func RouteWeb(routes *gin.RouterGroup) {
 
-	wb := route.Group("web")
+	route := routes.Group("web")
 	{
-		banners := wb.Group("banners")
+		banners := route.Group("banners")
 		{
 			banners.GET("", web.ToBannerByPaginate)
 			banners.PUT(":id", web.DoBannerByUpdate)
 			banners.DELETE(":id", web.DoBannerByDelete)
 		}
 
-		banner := wb.Group("banner")
+		banner := route.Group("banner")
 		{
 			banner.POST("", web.DoBannerByCreate)
 			banner.PUT("enable", web.DoBannerByEnable)
 		}
 
-		projects := wb.Group("projects")
+		projects := route.Group("projects")
 		{
 			projects.GET("", web.ToProjectByPaginate)
 			projects.GET(":id", web.ToProjectByInformation)
@@ -30,13 +30,13 @@ func RouteWeb(route *gin.RouterGroup) {
 			projects.DELETE(":id", web.DoProjectByDelete)
 		}
 
-		project := wb.Group("project")
+		project := route.Group("project")
 		{
 			project.POST("", web.DoProjectByCreate)
 			project.PUT("enable", web.DoProjectByEnable)
 		}
 
-		categories := wb.Group("categories")
+		categories := route.Group("categories")
 		{
 			categories.GET("", web.ToCategories)
 			categories.GET(":id", web.ToCategoryByInformation)
@@ -44,7 +44,7 @@ func RouteWeb(route *gin.RouterGroup) {
 			categories.DELETE(":id", web.DoCategoryByDelete)
 		}
 
-		category := wb.Group("category")
+		category := route.Group("category")
 		{
 			category.POST("", web.DoCategoryByCreate)
 			category.PUT("enable", web.DoCategoryByEnable)
@@ -52,7 +52,7 @@ func RouteWeb(route *gin.RouterGroup) {
 			category.PUT("is_required_html", web.DoCategoryByIsRequiredHtml)
 		}
 
-		classifications := wb.Group("classifications")
+		classifications := route.Group("classifications")
 		{
 			classifications.GET("", web.ToClassifications)
 			classifications.GET(":id", web.ToClassificationByInformation)
@@ -60,39 +60,39 @@ func RouteWeb(route *gin.RouterGroup) {
 			classifications.DELETE(":id", web.DoClassificationByDelete)
 		}
 
-		classification := wb.Group("classification")
+		classification := route.Group("classification")
 		{
 			classification.POST("", web.DoClassificationByCreate)
 			classification.GET("enable", web.ToClassificationByEnable)
 			classification.PUT("enable", web.DoClassificationByEnable)
 		}
 
-		contacts := wb.Group("contacts")
+		contacts := route.Group("contacts")
 		{
 			contacts.GET("", web.ToContactByPaginate)
 			contacts.PUT(":id", web.DoContactByUpdate)
 			contacts.DELETE(":id", web.DoContactByDelete)
 		}
 
-		contact := wb.Group("contact")
+		contact := route.Group("contact")
 		{
 			contact.POST("", web.DoContactByCreate)
 			contact.PUT("enable", web.DoContactByEnable)
 		}
 
-		pictures := wb.Group("pictures")
+		pictures := route.Group("pictures")
 		{
 			pictures.GET("", web.ToPictures)
 			pictures.PUT(":id", web.DoPictureByUpdate)
 			pictures.DELETE(":id", web.DoPictureByDelete)
 		}
 
-		picture := wb.Group("picture")
+		picture := route.Group("picture")
 		{
 			picture.POST("", web.DoPictureByCreate)
 		}
 
-		setting := wb.Group("setting")
+		setting := route.Group("setting")
 		{
 			setting.GET("", web.ToSettingByInformation)
 			setting.PUT("", web.DoSettingBySave)

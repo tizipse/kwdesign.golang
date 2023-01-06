@@ -23,6 +23,7 @@ func DoBannerByCreate(ctx *gin.Context) {
 	}
 
 	banner := model.WebBanner{
+		Client:   request.Client,
 		Theme:    request.Theme,
 		Picture:  request.Picture,
 		Name:     request.Name,
@@ -159,7 +160,7 @@ func ToBannerByPaginate(ctx *gin.Context) {
 		Data: nil,
 	}
 
-	tx := app.Database.Model(model.WebBanner{})
+	tx := app.Database.Model(model.WebBanner{}).Where("`client`=?", request.Client)
 
 	tx.Count(&responses.Total)
 

@@ -4,6 +4,7 @@
 create table web_banner
 (
     `id`         int unsigned     not null auto_increment,
+    `client`     varchar(10)      not null default '' comment '客户端：PC、MOBILE',
     `theme`      varchar(5)       NOT NULL DEFAULT '' COMMENT '主题：light=明亮；dark=黑暗',
     `picture`    varchar(255)     not null default '' comment '图片链接',
     `name`       varchar(32)      not null default '' comment '名称',

@@ -5,7 +5,7 @@ import "kwd/app/request/basic"
 type DoContactByCreate struct {
 	City      string `json:"city" form:"city" binding:"required,max=32"`
 	Address   string `json:"address" form:"address" binding:"required,max=255"`
-	Telephone string `json:"telephone" form:"telephone" binding:"required,max=32"`
+	Telephone string `json:"telephone" form:"telephone" binding:"omitempty,max=32"`
 	Order     int8   `json:"order" form:"order" binding:"required,gte=1,lte=99"`
 	IsEnable  int8   `json:"is_enable" form:"is_enable" binding:"required,oneof=1 2"`
 }
@@ -13,7 +13,7 @@ type DoContactByCreate struct {
 type DoContactByUpdate struct {
 	City      string `json:"city" form:"city" binding:"required,max=32"`
 	Address   string `json:"address" form:"address" binding:"required,max=255"`
-	Telephone string `json:"telephone" form:"telephone" binding:"required,max=32"`
+	Telephone string `json:"telephone" form:"telephone" binding:"omitempty,max=32"`
 	Order     int8   `json:"order" form:"order" binding:"required,gte=1,lte=99"`
 	IsEnable  int8   `json:"is_enable" form:"is_enable" binding:"required,oneof=1 2"`
 }

@@ -8,12 +8,12 @@ import (
 	"kwd/routes/client"
 )
 
-func Routes(route *gin.Engine) {
+func Routes(routes *gin.Engine) {
 
-	route.Use(basic.LoggerMiddleware())
+	routes.Use(basic.LoggerMiddleware())
 
-	route.Static("/upload", app.Dir.Runtime+"/upload")
+	routes.Static("upload", app.Dir.Runtime+"/upload")
 
-	admin.Admins(route)
-	client.Clients(route)
+	admin.Admins(routes)
+	client.Clients(routes)
 }

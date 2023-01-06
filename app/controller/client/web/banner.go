@@ -20,6 +20,7 @@ func ToBanners(ctx *gin.Context) {
 	for index, item := range banners {
 		responses[index] = wr.ToBanners{
 			Id:      item.Id,
+			Client:  item.Client,
 			Theme:   item.Theme,
 			Picture: item.Picture,
 			Name:    item.Name,

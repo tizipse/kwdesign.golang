@@ -3,6 +3,7 @@ package web
 import "kwd/app/request/basic"
 
 type DoBannerByCreate struct {
+	Client  string `json:"client" form:"client" binding:"required,oneof=PC MOBILE" label:"客户端"`
 	Theme   string `json:"theme" form:"theme" binding:"required,oneof=light dark" label:"主题"`
 	Picture string `json:"picture" form:"picture" binding:"required,url,max=255" label:"图片"`
 	Name    string `form:"name" json:"name" binding:"required,max=32" label:"名称"`
@@ -28,5 +29,7 @@ type DoBannerByEnable struct {
 }
 
 type ToBannerByPaginate struct {
+	Client string `json:"client" form:"client" binding:"required,oneof=PC MOBILE" label:"客户端"`
+
 	basic.Paginate
 }

@@ -5,48 +5,48 @@ import (
 	"kwd/app/controller/client/web"
 )
 
-func RouteWeb(route *gin.RouterGroup) {
+func RouteWeb(routes *gin.RouterGroup) {
 
-	wg := route.Group("web")
+	route := routes.Group("web")
 	{
 
-		categories := wg.Group("categories")
+		categories := route.Group("categories")
 		{
 			categories.GET(":uri", web.ToCategoryByInformation)
 		}
 
-		banners := wg.Group("banners")
+		banners := route.Group("banners")
 		{
 			banners.GET("", web.ToBanners)
 		}
 
-		picture := wg.Group("picture")
+		picture := route.Group("picture")
 		{
 			picture.GET("", web.ToPicture)
 		}
 
-		setting := wg.Group("setting")
+		setting := route.Group("setting")
 		{
 			setting.GET("", web.ToSetting)
 		}
 
-		contacts := wg.Group("contacts")
+		contacts := route.Group("contacts")
 		{
 			contacts.GET("", web.ToContacts)
 		}
 
-		classifications := wg.Group("classifications")
+		classifications := route.Group("classifications")
 		{
 			classifications.GET("", web.ToClassifications)
 		}
 
-		projects := wg.Group("projects")
+		projects := route.Group("projects")
 		{
 			projects.GET("", web.ToProjectByPaginate)
 			projects.GET(":id", web.ToProjectByInformation)
 		}
 
-		project := wg.Group("project")
+		project := route.Group("project")
 		{
 			project.GET("related", web.ToProjectByRelated)
 			project.GET("recommend", web.ToProjectByRecommend)

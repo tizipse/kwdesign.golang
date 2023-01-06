@@ -2,12 +2,12 @@ package client
 
 import "github.com/gin-gonic/gin"
 
-func Clients(route *gin.Engine) {
+func Clients(routes *gin.Engine) {
 
-	client := route.Group("client")
+	route := routes.Group("client")
 	{
 
-		RouteWeb(client)
+		RouteWeb(route)
 
 	}
 
