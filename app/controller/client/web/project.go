@@ -41,7 +41,11 @@ func ToProjectByPaginate(ctx *gin.Context) {
 
 		var projects []model.WebProject
 
-		tx.Order("dated_at desc, `id` desc").Find(&projects)
+		tx.
+			Order("dated_at desc, `id` desc").
+			Offset(request.GetOffset()).
+			Limit(request.GetLimit()).
+			Find(&projects)
 
 		responses.Data = make([]wr.ToProjectByPaginate, len(projects))
 
