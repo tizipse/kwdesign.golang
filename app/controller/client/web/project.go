@@ -35,7 +35,7 @@ func ToProjectByPaginate(ctx *gin.Context) {
 		tx = tx.Where("`classification_id`=?", request.Classification)
 	}
 
-	tx.Model(model.WebProject{}).Count(&responses.Total)
+	tx.Model(&model.WebProject{}).Count(&responses.Total)
 
 	if responses.Total > 0 {
 
